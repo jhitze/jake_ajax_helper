@@ -4,6 +4,7 @@ ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 configs = {
     '/Users/adam/software/programming/jake_ajax_helper/ajaxhelper': 'dev',
+    '/Users/jacobhitze/git/jake_ajax_helper/ajaxhelper': 'dev',
     '/app/ajaxhelper': 'heroku',
 }
 
@@ -77,6 +78,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     '/Users/adam/software/programming/jake_ajax_helper/ajaxhelper/static',
+    '/Users/jacobhitze/git/jake_ajax_helper/ajaxhelper/static',
     '/app/ajaxhelper/static/',
 )
 
@@ -119,6 +121,7 @@ ROOT_URLCONF = 'ajaxhelper.urls'
 
 TEMPLATE_DIRS = (
     "/Users/adam/software/programming/jake_ajax_helper/ajaxhelper/templates",
+    '/Users/jacobhitze/git/jake_ajax_helper/ajaxhelper/templates',
     '/app/ajaxhelper/templates/',
 )
 
