@@ -1,4 +1,11 @@
 # Django settings for ajaxhelper project.
+import os
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+configs = {
+    '/Users/adam/software/programming/jake_ajax_helper/ajaxhelper': 'dev',
+    '/app/ajaxhelper': 'heroku',
+}
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -153,5 +160,6 @@ LOGGING = {
 }
 
 # Heroku Specific
-import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
+if configs[ROOT_PATH] == 'heroku':
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
