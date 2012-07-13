@@ -15,9 +15,9 @@ def index_ajax(request):
     """Return random AJAX data in the format:
     {
         "page":[
-            {"hour":"14", "avg_resp_time":"127.5", "hits":"5809"},
-            {"hour":"1", "avg_resp_time":"0.5", "hits":"2"},
-            {"hour":"8", "avg_resp_time":"60", "hits":"1000"}
+            {"hour":"2012-06-21-14", "avg_resp_time":"127.5", "hits":"5809"},
+            {"hour":"2012-06-21-15", "avg_resp_time":"0.5", "hits":"2"},
+            {"hour":"2012-06-21-8", "avg_resp_time":"60", "hits":"1000"}
             ]
     }"""
 
