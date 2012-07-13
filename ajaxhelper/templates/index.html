@@ -84,13 +84,10 @@
                         d1.push(point);
 
                     }
-
-                    // Draw the graph
-                    Flotr.draw(
-                        container,
-                        [d1],
-                        {
-                            //bars : {
+		    
+		    //setup options
+		    options = {
+			    //bars : {
                             //    show : true,
                             //    horizontal : false,
                             //    shadowSize : 0,
@@ -99,20 +96,45 @@
 			    xaxis : {
 				mode : 'time',
 				title: 'date by hour',
-				timeFormat:'%m/%d - %h',
-				labelsAngle : 45
+				timeFormat:'%m/%d - %h'
 			    },
                             mouse : {
                                 track : true,
                                 relative : true
                             },
+			    selection : {
+				 mode : 'x'
+			    },
                             yaxis : {
                                 min : 0,
-                                max : 1000, 
-                                //autoscaleMargin : 1
+                                //max : 1000, 
+                                autoscaleMargin : 1
                             }
-                        }
-                    );
+                        };
+
+                    // Draw the graph
+		    function drawGraph (opts) {
+			o = Flotr._.extend(Flotr._.clone(options), opts || {});
+			
+			return Flotr.draw(
+					container,
+					[d1],
+					o   
+			);
+		    }
+		    
+		    graph = drawGraph();
+		    
+		    Flotr.EventAdapter.observe(container, 'flotr:select', function(area){
+		    // Draw selected area
+		    graph = drawGraph({
+		      xaxis : { min : area.x1, max : area.x2, mode : 'time', labelsAngle : 45 },
+		      yaxis : { min : area.y1, max : area.y2 }
+		      });
+		    });
+			
+		  // When graph is clicked, draw the graph with default area.
+		  Flotr.EventAdapter.observe(container, 'flotr:click', function () { graph = drawGraph(); });
 		    
                   })(document.getElementById("hits"));
 
@@ -129,12 +151,9 @@
 
                     }
 
-                    // Draw the graph
-                    Flotr.draw(
-                        container,
-                        [d1],
-                        {
-                            //bars : {
+                    //setup options
+		    options = {
+			    //bars : {
                             //    show : true,
                             //    horizontal : false,
                             //    shadowSize : 0,
@@ -143,20 +162,46 @@
 			    xaxis : {
 				mode : 'time',
 				title: 'date by hour',
-				timeFormat:'%m/%d - %h',
-				labelsAngle : 45
+				timeFormat:'%m/%d - %h'
 			    },
                             mouse : {
                                 track : true,
                                 relative : true
                             },
+			    selection : {
+				 mode : 'x'
+			    },
                             yaxis : {
                                 min : 0,
-                                //max : 100, 
+                                //max : 1000, 
                                 autoscaleMargin : 1
                             }
-                        }
-                    );
+                        };
+
+                    // Draw the graph
+		    function drawGraph (opts) {
+			o = Flotr._.extend(Flotr._.clone(options), opts || {});
+			
+			return Flotr.draw(
+					container,
+					[d1],
+					o   
+			);
+		    }
+		    
+		    graph = drawGraph();
+		    
+		    Flotr.EventAdapter.observe(container, 'flotr:select', function(area){
+		    // Draw selected area
+		    graph = drawGraph({
+		      xaxis : { min : area.x1, max : area.x2, mode : 'time', labelsAngle : 45 },
+		      yaxis : { min : area.y1, max : area.y2 }
+		      });
+		    });
+			
+		  // When graph is clicked, draw the graph with default area.
+		  Flotr.EventAdapter.observe(container, 'flotr:click', function () { graph = drawGraph(); });
+				    
                   })(document.getElementById("resp_time"));
             });
 
