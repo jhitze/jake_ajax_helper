@@ -1,4 +1,4 @@
-# Django settings for ajax_helper project.
+# Django settings for ajaxhelper project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -72,7 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/adam/software/programming/jake_ajax_helper/ajax_helper/static',
+    '/Users/adam/software/programming/jake_ajax_helper/ajaxhelper/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -110,13 +110,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'ajax_helper.urls'
+ROOT_URLCONF = 'ajaxhelper.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/Users/adam/software/programming/jake_ajax_helper/ajax_helper/templates"
+    "/Users/adam/software/programming/jake_ajax_helper/ajaxhelper/templates"
 )
 
 INSTALLED_APPS = (
@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'ajax_helper.responder',
+    'ajaxhelper.responder',
 )
 
 # A sample logging configuration. The only tangible logging
