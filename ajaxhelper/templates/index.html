@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <title>{% block title %}Current Status{% endblock %}</title>
+        <style type="text/css">
+#container {
+    width: 800px;
+    margin:auto;
+}
+#resp_time {
+    width: 800px;
+    height: 400px;
+    margin-bottom: 20px;
+}
+#hits {
+    width: 800px;
+    height: 400px;
+}
+        </style>
+        {% comment %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}envision.min.css">
+        <script src="{{ STATIC_URL }}envision.min.js"></script>
+        {% endcomment %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </head>
+    <body>
+        {% block body %}
+        <div id="container">
+            <h1>Current Status of page "Test"</h1>
+            <h3>Response Time</h3>
+            <div id="resp_time">Loading...</div>
+            <h3>Hits</h3>
+            <div id="hits">Loading...</div>
+        </div>
+        {% endblock %}
+
+        <script src="{{ STATIC_URL }}flotr2.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $.getJSON('/ajax', function(initialData) {
+                $("#hits").html('');
+                $("#resp_time").html('');
+                /*
+                table = "<table><tr><td>Hour</td><td>Avg Response Time</td><td>Hits</td></tr>";
+
+                for (i = 0; i < initialData['page'].length; i++)
+                {
+                    table += "<tr><td>" + initialData['page'][i]['hour'] + 
+                             "</td><td>" + initialData['page'][i]['avg_resp_time'] + 
+                             "</td><td>" + initialData['page'][i]['hits'] + 
+                             "</td></tr>";
+                }
+                table += "</table>";
+                var data = initialData['page'];
+                var hours         = "<tr><td>Hours</td>";
+                var avg_resp_time = "<tr><td>Avg Resp Time</td>";
+                var hits          = "<tr><td>Hits</td>";
+
+                for (i = 0; i < data.length; i++)
+                {
+                    hours         += "<td>" + data[i]['hour'] + "</td>";
+                    avg_resp_time += "<td>" + data[i]['avg_resp_time'] + "</td>";
+                    hits          += "<td>" + data[i]['hits'] + "</td>";
+                }
+
+                hours         += "</tr>";
+                avg_resp_time += "</tr>";
+                hits          += "</tr>";
+
+                var table = "<table>" + hours + avg_resp_time + hits + "</table>";
+
+                $("#table").html(table);
+                */
+                
+                //Chart logic
+                (function hits_chart(container) {
+                    var d1 = [],  // Hits
+                        point,
+                        i,
+                        data = initialData['page'];
+
+                    for (i = 0; i < 24; i++) {
+                        point = [i,parseInt(data[i]['hits'])];
+                        d1.push(point);
+
+                    }
+
+                    // Draw the graph
+                    Flotr.draw(
+                        container,
+                        [d1],
+                        {
+                            bars : {
+                                show : true,
+                                horizontal : false,
+                                shadowSize : 0,
+                                barWidth : 0.8
+                            },
+                            mouse : {
+                                track : true,
+                                relative : true
+                            },
+                            yaxis : {
+                                min : 0,
+                                max : 1000, 
+                                //autoscaleMargin : 1
+                            }
+                        }
+                    );
+                  })(document.getElementById("hits"));
+
+                (function resp_time_chart(container) {
+                    var d1 = [],  // Hits
+                        point,
+                        i,
+                        data = initialData['page'];
+
+                    for (i = 0; i < 24; i++) {
+                        point = [i,data[i]['avg_resp_time']];
+                        d1.push(point);
+
+                    }
+
+                    // Draw the graph
+                    Flotr.draw(
+                        container,
+                        [d1],
+                        {
+                            bars : {
+                                show : true,
+                                horizontal : false,
+                                shadowSize : 0,
+                                barWidth : 0.8
+                            },
+                            mouse : {
+                                track : true,
+                                relative : true
+                            },
+                            yaxis : {
+                                min : 0,
+                                max : 100, 
+                                //autoscaleMargin : 1
+                            }
+                        }
+                    );
+                  })(document.getElementById("resp_time"));
+            });
+
+        });
+        </script>
+    </body>
+</html>
