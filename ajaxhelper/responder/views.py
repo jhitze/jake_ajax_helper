@@ -28,7 +28,7 @@ def index_ajax(request):
 
         for newhour in range(24):
             container = {}
-	    this_date = this_date.replace(hour=newhour, minute=0, second=0)
+	    this_date = this_date.replace(hour=newhour, minute=0, second=0, microsecond=0)
             container['hour'] = this_date.isoformat()# + '-' + str(hour)
             container['avg_resp_time'] = '%.2f' % (random()*100)
             container['hits'] = str(randint(1,1000))
