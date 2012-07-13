@@ -78,8 +78,9 @@
                         i,
                         data = initialData['page'];
 
-                    for (i = 0; i < 24; i++) {
-                        point = [i,parseInt(data[i]['hits'])];
+                    for (i = 0; i < data.length - 1; i++) {
+			dataDate = new Date(data[i]['hour'])
+                        point = [dataDate ,parseInt(data[i]['hits'])];
                         d1.push(point);
 
                     }
@@ -89,12 +90,18 @@
                         container,
                         [d1],
                         {
-                            bars : {
-                                show : true,
-                                horizontal : false,
-                                shadowSize : 0,
-                                barWidth : 0.8
-                            },
+                            //bars : {
+                            //    show : true,
+                            //    horizontal : false,
+                            //    shadowSize : 0,
+                            //    barWidth : 0.8
+                            //},
+			    xaxis : {
+				mode : 'time',
+				title: 'date by hour',
+				timeFormat:'%m/%d - %h',
+				labelsAngle : 45
+			    },
                             mouse : {
                                 track : true,
                                 relative : true
@@ -106,6 +113,7 @@
                             }
                         }
                     );
+		    
                   })(document.getElementById("hits"));
 
                 (function resp_time_chart(container) {
