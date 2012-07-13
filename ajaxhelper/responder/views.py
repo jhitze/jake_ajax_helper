@@ -1,5 +1,5 @@
 import json
-from datetime import date,timedelta
+from datetime import datetime,timedelta
 from random import random,randint
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
@@ -23,12 +23,13 @@ def index_ajax(request):
 
     page = {'page': []}
 
-    for offset in range(45,-1,-1):
-        this_date = date.today() - timedelta(days=offset)
+    for offset in range(30,-1,-1):
+        this_date = datetime.today() - timedelta(days=offset)
 
-        for hour in range(24):
+        for newhour in range(24):
             container = {}
-            container['hour'] = this_date.isoformat() + '-' + str(hour)
+	    this_date = this_date.replace(hour=newhour, minute=0, second=0)
+            container['hour'] = this_date.isoformat()# + '-' + str(hour)
             container['avg_resp_time'] = '%.2f' % (random()*100)
             container['hits'] = str(randint(1,1000))
             page['page'].append(container)
